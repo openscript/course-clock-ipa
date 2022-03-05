@@ -5,11 +5,79 @@ Dieses Kapitel beinhaltet die komplette Aufgabenstellung im originalen Wortlaut.
 
 \section{Ausgangslage}
 
-\lipsum[1-2]
+Ein Kunde von uns bietet Kurse und Schulungen an. Dafür wird jeweils eine detaillierte Kursplanung erstellt. In dieser Kursplanung wird jedes Segment des Kurses mit einer Dauer, Beschreibung und anderen Eigenschaften geplant. Aktuell werden diese Kursplanungen mit Excel erstellt. Dadurch sind einzelne Segmente nicht so einfach wiederverwendbar, die Autoren gestalten die Planung unterschiedlich und manchmal kommt es vor das die originalen Dateien nicht mehr auffindbar sind. Eine weitere Herausforderung ist, dass unterschiedliche Vorlagen zirkulieren.
+
+Es soll eine clientseitige Webapplikation erstellt werden, womit eine detaillierte Kursplanung wie bisher mit der Excelvorlage (Beispiel im Dokumentenpool) erstellt werden kann. Dabei werden gewisse Verbesserungen gemacht, um bereits in der ersten Version das Benutzererlebnis zu verbessern. Der Kunde hat bereits andere clientseitige Webapplikationen im Einsatz, welche mit React entwickelt wurden. Um eine homogene Technologiestruktur zu leben, soll auch diese Applikation mit diesen bekannten Technologien entwickelt werden.
 
 \section{Detaillierte Aufgabenstellung}
 
-\lipsum[3-9]
+Bei der detaillierten Kursplanung geht es darum, dass ein Kurs in einzelne aufeinander abgestimmte Segmente aufgeteilt wird, wobei von jedem Segment die zeitlichen, didaktischen und inhaltlichen Aspekte beschrieben werden. Dieser chronologische Ablauf stellt eine Art Drehbuch für einen Kurs dar. Dabei wird darauf geachtet, dass die einzelnen Segment eine für die Teilnehmer ansprechende Rhythmisierung  aufweisen, also die Pausen und Inhalte in passenden Momenten und Längen vorkommen.
+
+In der erwähnten Excelvorlage gibt es folgende Spalten (Attribute) um Segmente zu beschreiben, welche in die zu entwickelnde Applikation zu übernehmen sind:
+\begin{itemize}
+  \item Startzeitpunkt (Uhrzeit; bspw. 09:30; Pflichtfeld)
+  \item Endzeitpunkt (Uhrzeit; bspw. 10:00; Pflichtfeld)
+  \item Dauer (berechnet; bspw. 30min)
+  \item Ziele (Mehrzeiliges Textfeld; bspw. Lernziel 1)
+  \item Ablauf, Beschreibung (Mehrzeiliges Textfeld, Pflichtfeld)
+  \item Referenz, Materialien, Unterlagen (Mehrzeiliges Textfeld; bspw. Übungsblatt A)
+  \item Didaktischer Kommentar, Hinweise (Mehrzeiliges Textfeld)
+\end{itemize}
+
+Einzelne Segmente in der Tabelle können in Abschnitte gegliedert werden. Ein Abschnitt hat ein bis mehrere Segmente und folgende weitere Attribute:
+\begin{itemize}
+  \item Startzeitpunkt (berechnet vom Startzeitpunkt des ersten Segments)
+  \item Endzeitpunkt (berechnet vom Endzeitpunkt vom letzten Segments)
+  \item Dauer (berechnet)
+  \item Referenz, Materialien, Unterlagen (berechnet und zusammengeführt von allen Segmenten in diesem Abschnitt)
+  \item Titel (Einzeiliges Textfeld; Pflichtfeld)
+\end{itemize}
+
+Zudem gibt es für die gesamte Kursplanung folgende Felder:
+\begin{itemize}
+  \item Autor (Einzeiliges Textfeld; Pflichtfeld)
+  \item Titel (Einzeiliges Textfeld; Pflichtfeld)
+  \item Änderungsdatum (berechnet)
+\end{itemize}
+
+Folgende funktionalen Anforderungen werden an die Applikation gestellt:
+\begin{itemize}
+  \item Als Kursplanner/in kann ich Segmente erstellen, bearbeiten und löschen.
+  \item Als Kursplanner/in kann ich Abschnitte erstellen, bearbeiten und löschen.
+  \item Als Kursplanner/in kann ich Abschnitte chronologisch per Drag'n'Drop (Klicken, halten, verschieben, loslassen) angeordnet werden.
+  \item Als Kursplanner/in kann ich den Autor und Titel der Planung bearbeiten.
+  \item Als Kursplanner/in kann ich Segmente innerhalb von Abschnitten per Drag'n'Drop verschieben.
+  \item Als Kursplanner/in kann ich Segmente in andere Abschnitte per Drag'n'Drop verschieben.
+  \item Als Kursplanner/in kann ich eine Planung exportieren (JSON Abbild der Daten als Download).
+  \item Als Kursplanner/in kann ich eine Planung importieren (JSON Abbild der Daten via Upload).
+  \item Als Kursplanner/in kann ich ein PDF clientseitig im Browser generieren.
+\end{itemize}
+
+Folgende Qualitätsanforderungen werden an die Applikation gestellt:
+\begin{itemize}
+  \item Es handelt sich um eine clientseitige Webapplikation (SPA), welche mit den Technologien React, TypeScript und ant.design entwickelt ist.
+  \item Die Benutzeroberfläche ist mit einem Prototypen (bspw. mit Figma, Penpot, ...), welcher die Navigation zwischen den einzelnen Ansichten ermöglicht, geplant.
+  \item Für eine spätere Version ist Mehrsprachigkeit (i18n) geplant. Dies soll in der ersten Version vorbereitet werden, indem das Framework React-Intl benutzt wird, um einzelne Textelemente der Benutzeroberfläche zu verwalten. Die Benutzeroberfläche ist aber vorerst nur in Deutsch umzusetzen.
+  \item Die Gestaltung (Schriftgrösse, Farben, Anordnung) entspricht der Standardkonfiguration des UI-Komponentenframeworks ant.design.
+  \item Das auszugebende PDF ist im Querformat zu erstellen.
+  \item Das auszugebende PDF muss alle Informationen einer Planung enthalten.
+  \item Die restliche Gestaltung des PDF ist nicht definiert und kann frei gewählt werden.
+  \item Die Quellcoderichtlinien \enquote{ESLint Airbnb Typescript} (https://github.com/iamturns/eslint-config-airbnb-typescript) sind einzuhalten.
+  \item Das Projekt ist auf Github zu Versionieren.
+  \item Continuous Integration (CI) und Delivery (CD) soll mittels Github Actions konfiguriert und umgesetzt werden.
+  \begin{itemize}
+    \item CI prüft bei einem Pull Request (PR) auf den Hauptzweig, ob erfolgreich \enquote{erstellt} (build) werden kann.
+    \item CI prüft bei einem Pull Request (PR) auf den Hauptzweig die Quellcoderichtlinien.
+    \item CI prüft bei einem Pull Request (PR) auf den Hauptzweig ob die automatischen Tests erfolgreich sind.
+    \item CD installiert nach einer Änderung des Hauptzweigs die letzte Version auf dem Testserver (Github Pages).
+  \end{itemize}
+\end{itemize}
 
 \section{Mittel und Methoden}
-\lipsum[10]
+
+\begin{description}
+  \item[Entwicklungsumgebung] Visual Studio Code
+  \item[Programmiersprache] TypeScript, JavaScript
+  \item[Frameworks] React 17.x, ant.design 4.17.x, create-react-app, Redux, React-intl
+  \item[Prototyping] Penpot.app
+\end{description}
