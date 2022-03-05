@@ -1,1 +1,16 @@
 \chapter{Realisieren}
+In diesem Teil der Dokumentation werden die einzelnen Schritte der Realisierung beleuchtet. Schritte, welche für die Nachvollziehbarkeit nicht notwendig sind, wie beispielsweise wiederholende Arbeiten, werden ausgelassen.
+
+\section{Entwicklungsumgebung aufsetzen}
+Das als Vorarbeit erstellte Repository wird mit \texttt{git clone https://github.com/openscript\\/course-clock} auf das Arbeitsgerät geklont und schliesslich das erstellte Verzeichnis mit Visual Studio Code über \menu{File > Open Folder...} geöffnet.
+
+Entwickelt wird die Lösung mit Visual Studio Code\footnote{siehe \url{https://code.visualstudio.com/}}. Um eine nachvollziehbare Entwicklungsumgebung zu schaffen, wird die Erweiterung \enquote{Remote - Containers}\footnote{siehe \url{https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers}} herangezogen. Mit dieser Erweiterung kann ein Docker Container benutzt werden, worin alle für die Entwicklung benötigte Software installiert ist.
+
+Auf dieser Basis wird ein solcher Entwicklungscontainer konfiguriert. Mit \keys{CTRL + SHIFT + P} und der Eingabe \texttt{Remote-Containers: Add Development Container Configuration Files...} können die notwendigen Konfigurationsdateien generiert werden. Als Basis dient die \enquote{Node.js \& TypeScript}-Vorlage\footnote{siehe \url{https://code.visualstudio.com/docs/remote/containers}}.
+
+Wiederum mit \keys{CTRL + SHIFT + P} und der Eingabe \texttt{Remote-Container: Reopen in Contain\\er...} kann nun das Projekt im Entwicklungscontainer geöffnet werden.
+
+\section{Projekt initialisieren}
+Im in Visual Studio Code integrierten Terminal kann nun mit der Eingabe \texttt{yarn create react-app --template typescript course-clock} ein neues React-Projekt, welche TypeScript verwendet, initialisiert werden. Dadurch, dass immer ein neues Verzeichnis fürs Generieren eines Projektes mit \texttt{yarn create} erstellt wird, jedoch aber schon ein Projektverzeichnis besteht, müssen nun noch die Datei aus dem Verzeichnis \texttt{course-clock} ins Elternverzeichnis und damit ins Projekthauptverzeichnis verschoben werden. Dies geschieht mit \texttt{mv course-clock/.[!.]* .}. Die Zeichen \texttt{[!.]} helfen sowohl versteckte Dateien als auch normale Dateien zu verschieben, wie \cite{move_hidden_files-ask_ubuntu} beschreibt. Das übriggebliebene Verzeichnis \texttt{course-clock} kann nun mit \texttt{rm -r course-clock} gelöscht werden.
+
+Mit dem Kommando \texttt{yarn start} kann nun das Projekt im Entwicklermodus gestartet werden. Der Browser öffnet sich automatisch und die Beispielseite öffnet sich. 
