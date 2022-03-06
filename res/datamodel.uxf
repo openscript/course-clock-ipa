@@ -1,0 +1,19 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>390</x><y>590</y><w>180</w><h>170</h></coordinates><panel_attributes>Segment
+--
+start: Time [1]
+end: Time [1]
+goals: String [0..1]
+description: String [1]
+attachments: String [0..1]
+comment: String [0..1]</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>390</x><y>330</y><w>180</w><h>170</h></coordinates><panel_attributes>Section
+--
+title: String [1]</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>80</x><y>330</y><w>180</w><h>170</h></coordinates><panel_attributes>Course
+--
+title: String [1]
+author: String [1]</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>250</x><y>400</y><w>160</w><h>50</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=1..*
+consists of &gt;</panel_attributes><additional_attributes>10;20;140;20</additional_attributes></element><element><id>Relation</id><coordinates><x>470</x><y>490</y><w>120</w><h>120</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=1..*
+described with v</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element></diagram>
